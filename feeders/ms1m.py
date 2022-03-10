@@ -18,7 +18,7 @@ class MS1M(object):
         knn_path=None,
         is_norm_feat=False,
         prefix='../save',
-        knn_method='faiss_gpu',
+        knn_method='faiss',
         is_reload=False,
         is_train=True,
         is_sim=False,
