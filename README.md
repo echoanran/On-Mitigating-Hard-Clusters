@@ -14,8 +14,10 @@ pip install -r requirements.txt
 # Usage
 
 ## Dataset Preparation
-### Data format
 
+Here we use MS1M dataset as an example.
+
+### Data format
 The data directory is constucted as follows:
 ```
 .
@@ -53,14 +55,11 @@ data
     ├── pretrained_lgcn_ms1m.pth        # 97fc6e52d1b5e907eabeb01e7b0825f9
 ```
 
-###  Supported datasets
-The supported datasets are listed below.
-
-- [MS-Celeb-1M](https://www.microsoft.com/en-us/research/project/ms-celeb-1m-challenge-recognizing-one-million-celebrities-real-world/)
-    - Part1 (584K): [GoogleDrive](https://drive.google.com/open?id=16WD4orcF9dqjNPLzST2U3maDh2cpzxAY) or [BaiduYun](https://pan.baidu.com/s/1i4GYYNKTyp3lvOYLrvWc0g) (passwd: geq5)
-    - Benchmarks (5.21M): [GoogleDrive](https://drive.google.com/file/d/10boLBiYq-6wKC_N_71unlMyNrimRjpVa/view?usp=sharing).
+### Downloads
+- [MS1M](https://www.microsoft.com/en-us/research/project/ms-celeb-1m-challenge-recognizing-one-million-celebrities-real-world/)
+    - Part1 (584K): [GoogleDrive](https://drive.google.com/open?id=16WD4orcF9dqjNPLzST2U3maDh2cpzxAY).
+    - Other Test Subsets (5.21M): [GoogleDrive](https://drive.google.com/file/d/10boLBiYq-6wKC_N_71unlMyNrimRjpVa/view?usp=sharing).
     - Precomputed KNN: [GoogleDrive](https://drive.google.com/file/d/1CRwzy899vkLqIYm60AzDsaDEBuwgxNlY/view?usp=sharing).
-- [DeepFashion](http://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html): [GoogleDrive](https://drive.google.com/open?id=15B5Ypj8_U9rhcuvkrkCZQAgV4cfes7aV) or [BaiduYun](https://pan.baidu.com/s/174XeXhCOBAMryKcz9IDc8g) (passwd: 8fai)
 
 ## Configuration
 
