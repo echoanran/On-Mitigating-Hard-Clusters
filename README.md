@@ -32,7 +32,7 @@ The data directory is constucted as follows:
 
 - `features` currently supports binary file.
 - `labels` supports plain text where each line indicates a label corresponding to the feature file.
-- `knns` is not necessary as it can be built with the provided functions.
+- `knns` can also be computed with "is_reload" in configuration files set to True.
 
 Take MS1M (Part0 and Part1) as an example. The data directory is as follows:
 ```
@@ -56,7 +56,9 @@ data
 
 ## Configuration
 
-Configuration files are provided in "./config". "config_train_ms1m.yaml" for training our similarity prediction model on the training set, i.e., "part0_train". "config_eval_ms1m_part*.yaml" for evaluation on the 5 test subsets, i.e., "part1_test", "part3_test", "part5_test", "part7_test", "part9_test".
+Configuration files are provided in `./config`. 
+- `config_train_ms1m.yaml` for training our similarity prediction model on the training set, i.e., "part0_train". 
+- `config_eval_ms1m_part*.yaml` for evaluation on the 5 test subsets, i.e., "part1_test", "part3_test", "part5_test", "part7_test", "part9_test".
 
 ## Training
 
@@ -66,9 +68,9 @@ After setting the configuration, to start training, simply run
 python main.py -c ./config/config_train_ms1m.yaml
 ```
 
-Folder for saving checkpoints is specified in the configuration file using parameter "work_dir".
+Folder for saving checkpoints is specified in the configuration file using parameter `work_dir`.
 
-We provide a pre-trained model "checkpoint.tar" in "./save/Ours".
+We provide a pre-trained model `checkpoint.tar` in `./save/Ours`.
 
 ## Test
 Once the training is completed, the obtained model can be used for clustering. To start clustering on the test subset "part*_test", simply run
@@ -77,4 +79,4 @@ Once the training is completed, the obtained model can be used for clustering. T
 python eval.py -c ./config/config_eval_ms1m_part*.yaml
 ```
 
-The clustering results will be saved in "work_dir/results".
+The clustering results will be saved in `work_dir/results`.

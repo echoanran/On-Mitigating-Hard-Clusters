@@ -1,11 +1,9 @@
 from re import I
 from .ms1m import MS1M
-from .deepfashion import DeepFashion
 
 
 __factory__ = {
-    'ms1m': MS1M,
-    'deepfashion': DeepFashion
+    'ms1m': MS1M
 }
 
 
