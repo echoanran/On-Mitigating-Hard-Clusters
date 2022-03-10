@@ -46,13 +46,6 @@ data
   ├── knns
     ├── part0_train/faiss_k_80.npz      # 5e4f6c06daf8d29c9b940a851f28a925
     ├── part1_test/faiss_k_80.npz       # d4a7f95b09f80b0167d893f2ca0f5be5
-  ├── pretrained_models
-    ├── pretrained_gcn_d_ms1m.pth       # 213598e70ddbc50f5e3661a6191a8be1
-    ├── pretrained_gcn_s_ms1m.pth       # 3251d6e7d4f9178f504b02d8238726f7
-    ├── pretrained_gcn_d_iop_ms1m.pth   # 314fba47b5156dcc91383ad611d5bd96
-    ├── pretrained_gcn_v_ms1m.pth       # 020236d4e8dbff975360f08cb47109c0
-    ├── pretrained_gcn_e_ms1m.pth       # 315ff08f28f14bc494dd36158c11e900
-    ├── pretrained_lgcn_ms1m.pth        # 97fc6e52d1b5e907eabeb01e7b0825f9
 ```
 
 ### Downloads
