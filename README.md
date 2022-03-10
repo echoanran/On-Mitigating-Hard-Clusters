@@ -32,7 +32,7 @@ The data directory is constucted as follows:
 
 - `features` currently supports binary file.
 - `labels` supports plain text where each line indicates a label corresponding to the feature file.
-- `knns` can also be computed with "is_reload" in configuration files set to True.
+- `knns` can also be computed with `is_reload` in configuration files set to True.
 
 Take MS1M (Part0 and Part1) as an example. The data directory is as follows:
 ```
