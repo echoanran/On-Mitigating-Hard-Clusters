@@ -1,0 +1,99 @@
+# general
+seed: 42
+workers: 8
+work_dir: "./save/Ours"
+debug: False
+
+# print options
+print_interval: 100
+
+# save options
+save_interval: 1
+
+# inference options
+inference_interval: 1
+
+# dataset options
+batch_size: 512
+test_batch_size: 512
+
+dataset_name: 'ms1m'
+dataset_args:
+  feature_path: '/home/chenyingjie.cyj/Documents/Dataset/Clustering/ms1m/features/part0_train.bin'
+  label_path: '/home/chenyingjie.cyj/Documents/Dataset/Clustering/ms1m/labels/part0_train.meta'
+  feature_dim: &feature_dim 256
+  topk: &topk 1
+  model_topk: &model_topk 80
+  knn_path: './save/knns/ms1m/part0_train/faiss_k_80.npz'
+  is_norm_feat: True
+  prefix: './save'
+  is_reload: False
+  is_train: True
+
+test_dataset_name: 'ms1m'
+test_dataset_args:
+  feature_path: '/home/chenyingjie.cyj/Documents/Dataset/Clustering/ms1m/features/part1_test.bin'
+  label_path: '/home/chenyingjie.cyj/Documents/Dataset/Clustering/ms1m/labels/part1_test.meta'
+  feature_dim: *feature_dim
+  topk: *topk
+  model_topk: *model_topk
+  knn_path: './save/knns/ms1m/part1_test/faiss_k_80.npz'
+  is_norm_feat: True
+  prefix: './save'
+  is_reload: False
+  is_train: False
+  is_size: True
+  is_similarity: True
+
+# train options
+start_epoch: 0
+epochs: 0
+reload: False
+
+# optimizer options
+learning_rate: 0.0001
+weight_decay: 0.0005
+clip_max_norm: -1
+
+# model options
+model_name: transformer
+model_args:
+  d_model: 256
+  nhead: 8
+  dim_feedforward: 2048
+  dropout: 0.2
+  activation: "relu"
+  normalize_before: False
+  num_encoder_layers: 1
+  num_of_feats: *model_topk
+
+# loss options
+loss_list: ['pair']
+loss_args: NULL
+lambdas:
+  instance: 1
+  pair: 1
+
+# eval options
+density_args: 
+  density_type: 'approx_diffusion_asym'
+  data_driven: False
+  rho: 0.7
+  k: 20
+  n_nbrs: 300
+  sigma: 0.5
+  d: 0.1
+  epsion: 0.05
+  transport_dist: True
+  trans_sigma: 0.05
+
+cluster_args: 
+  compute_time: True
+  max_conn: 1
+  tau_start: 0.99
+  tau_end: 0.99
+  tau_step: 1
+  select_by: 'pairwise'
+
+train_knn_path: './save/knns/ms1m/part0_train/faiss_k_80.npz'
+test_knn_path: './save/knns/ms1m/part1_test/faiss_k_80.npz'

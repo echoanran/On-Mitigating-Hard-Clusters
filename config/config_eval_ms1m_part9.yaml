@@ -1,0 +1,78 @@
+# general
+seed: 42
+workers: 4
+
+work_dir: "./save/Ours"
+prefix: "part9_eval"
+eval_epoch: 7
+
+save_feature: False
+recompute_dist: True
+mode: "test"
+
+class_sim_path: "./save/class_sim/ms1m/part9_test/sim.npy"
+
+# print options
+print_interval: 100
+
+# dataset options
+batch_size: 512
+test_batch_size: 512
+
+dataset_name: "ms1m"
+dataset_args:
+  feature_path: "/home/chenyingjie.cyj/Documents/Dataset/Clustering/ms1m/features/part0_train.bin"
+  label_path: "/home/chenyingjie.cyj/Documents/Dataset/Clustering/ms1m/labels/part0_train.meta"
+  feature_dim: &feature_dim 256
+  topk: &topk 1
+  model_topk: &model_topk 80
+  knn_path: "./save/knns/ms1m/part0_train/faiss_k_80.npz"
+  is_norm_feat: True
+  prefix: "./save"
+  is_reload: False
+  is_train: True
+
+test_dataset_name: "ms1m"
+test_dataset_args:
+  feature_path: "/home/chenyingjie.cyj/Documents/Dataset/Clustering/ms1m/features/part9_test.bin"
+  label_path: "/home/chenyingjie.cyj/Documents/Dataset/Clustering/ms1m/labels/part9_test.meta"
+  feature_dim: *feature_dim
+  topk: *topk
+  model_topk: *model_topk
+  knn_path: "./save/knns/ms1m/part9_test/faiss_k_80.npz"
+  is_norm_feat: True
+  prefix: "./save"
+  is_reload: False
+  is_train: False
+  is_sim: True
+
+# model options
+model_name: transformer
+model_args:
+  d_model: 256
+  nhead: 8
+  dim_feedforward: 2048
+  dropout: 0.2
+  activation: "relu"
+  normalize_before: False
+  num_encoder_layers: 1
+  num_of_feats: *model_topk
+
+# eval options
+density_args:
+  density_type: "approximate_NDDe"
+  k: 20
+  TPDi: True
+
+cluster_args:
+  compute_time: True
+  max_conn: 1
+  tau_start: 0.7
+  tau_end: 0.7
+  tau_step: 1
+  select_by: "pairwise"
+  compute_size: True
+  compute_sim: True
+
+train_knn_path: "./save/knns/ms1m/part0_train/faiss_k_80.npz"
+test_knn_path: "./save/knns/ms1m/part9_test/faiss_k_80.npz"
