@@ -42,8 +42,6 @@ test_dataset_args:
   prefix: './save'
   is_reload: False
   is_train: False
-  is_size: True
-  is_similarity: True
 
 # train options
 start_epoch: 0

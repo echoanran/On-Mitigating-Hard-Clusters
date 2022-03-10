@@ -135,24 +135,6 @@ class MS1M(object):
                 self.gt_labels[self.nbrs[cur_idx, :self.topk]])
         self.aggre_labels = np.array(self.aggre_labels)
 
-    def _compute_sim(self):
-
-        self.gt_labels
-        self.features
-
-        unique_labels = np.unique(self.gt_labels)
-        self.class_sim = {}
-        for label in unique_labels:
-            features = self.features[self.gt_labels == label]
-            gravity_center = np.mean(features, 0)
-            l2_dist = []
-            for f in features:
-                l2_dist.append(np.linalg.norm(f - gravity_center))
-
-            self.class_sim[int(label)] = np.sim(l2_dist)
-
-        return self.class_sim
-
     def _compute_size(self):
 
         self.gt_labels

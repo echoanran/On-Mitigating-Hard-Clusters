@@ -9,7 +9,7 @@ save_feature: False
 recompute_dist: True
 mode: "test"
 
-class_sim_path: "./save/class_sim/ms1m/part3_test/sim.npy"
+# class_sim_path: "./save/class_sim/ms1m/part3_test/sim.npy"
 
 # print options
 print_interval: 100
@@ -43,7 +43,8 @@ test_dataset_args:
   prefix: "./save"
   is_reload: False
   is_train: False
-  is_sim: True
+  is_size: False
+  is_similarity: False
 
 # model options
 model_name: transformer
