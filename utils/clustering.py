@@ -63,8 +63,6 @@ class Clustering():
         density, total_time = dsty.compute_density(
             normalize=False, compute_time=self.cluster_args['compute_time'])
 
-        print(density[:100])
-
         np.save(
             os.path.join(self.work_dir, 'results', self.prefix + '_density'),
             density)
