@@ -289,4 +289,4 @@ class Clustering():
                                  self.prefix + '_sim_bin_NMI.txt'),
                     np.array([NMI]))
 
-            return best_pairwise_fscore, best_bcubed_fscore
+        return best_pairwise_fscore, best_bcubed_fscore

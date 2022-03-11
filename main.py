@@ -96,17 +96,6 @@ class Run():
             num_workers=self.args.workers,
         )
 
-        test_dataset = build_dataset(self.args.test_dataset_name,
-                                     self.args.test_dataset_args)
-
-        self.data_loader_test = torch.utils.data.DataLoader(
-            test_dataset,
-            batch_size=self.args.test_batch_size,
-            shuffle=False,
-            drop_last=False,
-            num_workers=self.args.workers,
-        )
-
     def load_model(self):
         # initialize model
         self.model = build_model(self.args.model_name, self.args.model_args)
@@ -190,15 +179,13 @@ class Run():
 
         return loss_epoch
 
-    def inference(self, mode='test'):
+    def inference(self):
         self.model.eval()
         features = []
         labels = []
         dists = []
-        if mode == 'train':
-            data_loader = self.data_loader_train
-        else:
-            data_loader = self.data_loader_test
+
+        data_loader = self.data_loader_train
 
         for step, (_, label, feature) in enumerate(data_loader):
 
@@ -220,7 +207,7 @@ class Run():
 
             if step % self.args.print_interval == 0:
                 print(
-                    f"Step [{step}/{len(self.data_loader_test)}]\t Processing features for {mode} data..."
+                    f"Step [{step}/{len(self.data_loader)}]\t Processing features for training data..."
                 )
         labels = np.array(labels)
         self.dists = np.array(dists)
@@ -232,19 +219,15 @@ class Run():
 
         return features, labels
 
-    def clustering(self, mode='test'):
+    def clustering(self):
 
         if len(self.labels.shape) >= 2:
             gt = self.labels[:, 0]
         else:
             gt = self.labels
 
-        if mode == 'train':
-            knns = np.load(self.args.train_knn_path)['data']
-            _, knn = knns2ordered_nbrs(knns)
-        else:
-            knns = np.load(self.args.test_knn_path)['data']
-            _, knn = knns2ordered_nbrs(knns)
+        knns = np.load(self.args.train_knn_path)['data']
+        _, knn = knns2ordered_nbrs(knns)
 
         # class sim
         if 'class_sim_path' in self.args:
@@ -259,10 +242,6 @@ class Run():
         order = np.argsort(self.dists, axis=1)
         first_order = np.arange(order.shape[0])[:, None]
         new_knn = knn[first_order, order]
-        if self.args.dataset_name == 'gcnve':
-            new_labels = gt
-        else:
-            new_labels = self.labels[first_order, order]
 
         if not os.path.exists(os.path.join(self.args.work_dir, 'inference')):
             os.makedirs(os.path.join(self.args.work_dir, 'inference'))
@@ -270,11 +249,11 @@ class Run():
         np.save(
             os.path.join(
                 self.args.work_dir, 'inference', self.args.dataset_name +
-                '_knn_' + mode + '_epoch{}'.format(self.epoch)), new_knn)
+                '_knn_' + '_epoch{}'.format(self.epoch)), new_knn)
         np.save(
             os.path.join(
                 self.args.work_dir, 'inference', self.args.dataset_name +
-                '_dist_' + mode + '_epoch{}'.format(self.epoch)), new_dist)
+                '_dist_' + '_epoch{}'.format(self.epoch)), new_dist)
 
         print("knn shape: {}, dist shape: {}".format(new_knn.shape,
                                                      new_dist.shape))
@@ -321,11 +300,8 @@ class Run():
                            epoch)
 
             if epoch == 0 or epoch % self.args.inference_interval == 0 or epoch == self.args.epochs - 1:
-                try:
-                    self.inference(mode='test')
-                    self.clustering(mode='test')
-                except:
-                    raise RuntimeError
+                    self.inference()
+                    self.clustering()
 
             print(f"=======> {self.args.work_dir}")
             print(

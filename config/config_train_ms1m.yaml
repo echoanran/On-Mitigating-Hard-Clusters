@@ -1,7 +1,7 @@
 # general
 seed: 42
 workers: 8
-work_dir: "./save/Ours"
+work_dir: "./save/xxx"
 debug: False
 
 # print options
@@ -45,7 +45,7 @@ test_dataset_args:
 
 # train options
 start_epoch: 0
-epochs: 0
+epochs: 10
 reload: False
 
 # optimizer options
@@ -67,31 +67,25 @@ model_args:
 
 # loss options
 loss_list: ['pair']
-loss_args: NULL
+loss_args: 
+  verbose: False
 lambdas:
-  instance: 1
   pair: 1
 
 # eval options
-density_args: 
-  density_type: 'approx_diffusion_asym'
-  data_driven: False
-  rho: 0.7
-  k: 20
-  n_nbrs: 300
-  sigma: 0.5
-  d: 0.1
-  epsion: 0.05
-  transport_dist: True
-  trans_sigma: 0.05
+density_args:
+  density_type: "approximate_NDDe"
+  TPDi: True
 
-cluster_args: 
-  compute_time: True
+cluster_args:
+  compute_time: False
   max_conn: 1
-  tau_start: 0.99
-  tau_end: 0.99
+  tau_start: 0.7
+  tau_end: 0.7
   tau_step: 1
-  select_by: 'pairwise'
+  select_by: "pairwise"
+  compute_size: False
+  compute_sim: False
 
 train_knn_path: './save/knns/ms1m/part0_train/faiss_k_80.npz'
 test_knn_path: './save/knns/ms1m/part1_test/faiss_k_80.npz'

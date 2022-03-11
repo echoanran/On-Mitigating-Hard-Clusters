@@ -10,8 +10,6 @@ save_feature: False
 recompute_dist: True
 mode: "test"
 
-# class_sim_path: "./save/class_sim/ms1m/part7_test/sim.npy"
-
 # print options
 print_interval: 100
 
@@ -62,18 +60,17 @@ model_args:
 # eval options
 density_args:
   density_type: "approximate_NDDe"
-  k: 20
   TPDi: True
 
 cluster_args:
-  compute_time: True
+  compute_time: False
   max_conn: 1
   tau_start: 0.7
   tau_end: 0.7
   tau_step: 1
   select_by: "pairwise"
-  compute_size: True
-  compute_sim: True
+  compute_size: False
+  compute_sim: False
 
 train_knn_path: "./save/knns/ms1m/part0_train/faiss_k_80.npz"
 test_knn_path: "./save/knns/ms1m/part7_test/faiss_k_80.npz"

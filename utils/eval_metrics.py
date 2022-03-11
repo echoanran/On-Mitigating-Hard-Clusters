@@ -73,10 +73,8 @@ class Evaluator():
         n_samples = self.gt_labels.shape[0]
         c = contingency_matrix(self.gt_labels, self.pred_labels, sparse=True)
         tk = np.dot(c.data, c.data) - n_samples
-        print(tk)
         pk = np.sum(np.asarray(c.sum(axis=0)).ravel()**2) - n_samples
         qk = np.sum(np.asarray(c.sum(axis=1)).ravel()**2) - n_samples
-        print(pk, qk)
         avg_pre = tk / (pk + 1e-4)
         avg_rec = tk / (qk + 1e-4)
         fscore = 2. * avg_rec * avg_pre / (avg_pre + avg_rec + 1e-4)
