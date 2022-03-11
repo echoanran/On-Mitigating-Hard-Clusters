@@ -50,8 +50,8 @@ data
 
 ### Downloads
 - [MS1M](https://www.microsoft.com/en-us/research/project/ms-celeb-1m-challenge-recognizing-one-million-celebrities-real-world/)
-    - Part1 (584K): [GoogleDrive](https://drive.google.com/open?id=16WD4orcF9dqjNPLzST2U3maDh2cpzxAY).
-    - Other Test Subsets (5.21M): [GoogleDrive](https://drive.google.com/file/d/10boLBiYq-6wKC_N_71unlMyNrimRjpVa/view?usp=sharing).
+    - Part0 for training and Part1 for test (584K): [GoogleDrive](https://drive.google.com/open?id=16WD4orcF9dqjNPLzST2U3maDh2cpzxAY).
+    - All Parts (Part0 for training and Part 1, 3, 5, 7, 9 for test): [GoogleDrive](https://drive.google.com/file/d/10boLBiYq-6wKC_N_71unlMyNrimRjpVa/view?usp=sharing).
     - Precomputed KNN: [GoogleDrive](https://drive.google.com/file/d/1CRwzy899vkLqIYm60AzDsaDEBuwgxNlY/view?usp=sharing).
 
 ## Configuration
