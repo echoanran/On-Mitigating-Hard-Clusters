@@ -21,6 +21,7 @@ class MS1M(object):
         knn_method='faiss',
         is_reload=False,
         is_train=True,
+        is_aggregate=False,
         is_sim=False,
         is_size=False,
         is_similarity=False,
@@ -108,32 +109,31 @@ class MS1M(object):
         aggre_path = os.path.join(self.prefix, 'aggre_feats', 'ms1m',
                                   feature_path.split('/')[-1].split('.')[0],
                                   'faiss_k_' + str(self.topk) + '.npy')
-        if not self.is_reload and os.path.exists(aggre_path):
-            print('load aggregated feature from {}'.format(aggre_path))
-            self.aggregated_features = np.load(os.path.join(aggre_path))
-        else:
-            print('recompute aggregated feature and save in {}'.format(
-                aggre_path))
-            self.aggregated_features = []
+        
+        with Timer('compute aggregated feature'):
+            if is_aggregate:
+                if not self.is_reload and os.path.exists(aggre_path):
+                    print('load aggregated feature from {}'.format(aggre_path))
+                    self.aggregated_features = np.load(os.path.join(aggre_path))
+                else:
+                    print('recompute aggregated feature and save in {}'.format(
+                        aggre_path))
+                    self.aggregated_features = []
 
-            for cur_idx, nbr_idxs in enumerate(self.nbrs[:, :self.topk]):
-                features = self.features[nbr_idxs]
-                nbr_dists = self.dists[cur_idx, :self.topk]
-                aggregated_feature = get_weighted_feature(features, nbr_dists)
-                self.aggregated_features.append(aggregated_feature)
-            self.aggregated_features = np.array(self.aggregated_features)
+                    for cur_idx, nbr_idxs in enumerate(self.nbrs[:, :self.topk]):
+                        features = self.features[nbr_idxs]
+                        nbr_dists = self.dists[cur_idx, :self.topk]
+                        aggregated_feature = get_weighted_feature(features, nbr_dists)
+                        self.aggregated_features.append(aggregated_feature)
+                    self.aggregated_features = np.array(self.aggregated_features)
 
-            if not os.path.exists(os.path.dirname(aggre_path)):
-                os.makedirs(os.path.dirname(aggre_path))
-            np.save(aggre_path, self.aggregated_features)
-        print('aggregated_features shape: {}'.format(
-            self.aggregated_features.shape))
-
-        self.aggre_labels = []
-        for cur_idx, _ in enumerate(self.nbrs):
-            self.aggre_labels.append(
-                self.gt_labels[self.nbrs[cur_idx, :self.topk]])
-        self.aggre_labels = np.array(self.aggre_labels)
+                    if not os.path.exists(os.path.dirname(aggre_path)):
+                        os.makedirs(os.path.dirname(aggre_path))
+                    np.save(aggre_path, self.aggregated_features)
+                print('aggregated_features shape: {}'.format(
+                    self.aggregated_features.shape))
+            else:
+                self.aggregated_features = self.features
 
     def _compute_size(self):
 
