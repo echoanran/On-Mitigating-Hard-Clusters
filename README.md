@@ -1,5 +1,6 @@
 # On Mitigating Hard Clusters for Face Clustering
 
+
 # Dependency
 
 - python>=3.6
@@ -92,5 +93,4 @@ If you use this repo in your research or wish to refer to the baseline results p
   booktitle={IEEE ECCV},
   year={2022}
 }
-```
 ```
