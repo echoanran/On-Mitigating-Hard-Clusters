@@ -80,3 +80,17 @@ python eval.py -c ./config/config_eval_ms1m_part*.yaml
 ```
 
 The clustering results will be saved in `work_dir/results`.
+
+## Citation 
+
+If you use this repo in your research or wish to refer to the baseline results published in this paper, please use the following BibTeX entry.
+
+```bibtex
+@inproceedings{yingjie2022,
+  title={On Mitigating Hard Clusters for Face Clustering},
+  author={Chen, Yingjie and Zhong, Huasong and Chen, Chong and Shen, Chen and Huang, Jianqiang and Wang, Tao and Liang, Yun and Sun, Qianru},
+  booktitle={IEEE ECCV},
+  year={2022}
+}
+```
+```
